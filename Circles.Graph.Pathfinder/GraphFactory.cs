@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using System.Numerics;
 using Circles.Graph.Graphs;
 
@@ -13,36 +14,46 @@ public class GraphFactory
     /// <returns>A capacity graph created from the balance and trust graphs.</returns>
     public CapacityGraph CreateCapacityGraph(BalanceGraph balanceGraph, TrustGraph trustGraph)
     {
-        // Take the balance and trust graphs and create a capacity graph.
-        // 1. Create a unified list of nodes from both graphs
-        // 2. Leave the capacity edges from the balance graph in place
-        // 3. Create more capacity edges based on the trust graph:
-        //    - For each balance, check if there is a node that is willing to accept the balance (is trusting the token issuer)
-        //    - If there is, create a capacity edge from the balance node to the accepting node
-
         var capacityGraph = new CapacityGraph();
 
-        // Step 1: Create a unified list of nodes from both graphs
-        foreach (var avatar in balanceGraph.AvatarNodes.Values)
-        {
-            capacityGraph.AddAvatar(avatar.Address);
-        }
+        var stopWatch = new Stopwatch();
+        stopWatch.Start();
 
+        // Step 1: Create unified list of nodes
+        var allAvatarAddresses = new HashSet<string>(balanceGraph.AvatarNodes.Values.Select(a => a.Address));
         foreach (var avatar in trustGraph.AvatarNodes.Values)
         {
-            capacityGraph.AddAvatar(avatar.Address);
+            allAvatarAddresses.Add(avatar.Address);
         }
 
-        // Add BalanceNodes
+        stopWatch.Stop();
+        Console.WriteLine($"Created unified list of nodes in {stopWatch.ElapsedMilliseconds}ms");
+
+        stopWatch.Restart();
+        foreach (var address in allAvatarAddresses)
+        {
+            capacityGraph = capacityGraph.AddAvatar(address);
+        }
+
+        stopWatch.Stop();
+        Console.WriteLine($"Added avatars in {stopWatch.ElapsedMilliseconds}ms");
+
+        stopWatch.Restart();
+
         foreach (var balanceNode in balanceGraph.BalanceNodes.Values)
         {
-            capacityGraph.AddBalanceNode(balanceNode.Address, balanceNode.Token, balanceNode.Amount);
+            capacityGraph = capacityGraph.AddBalanceNode(balanceNode.Address, balanceNode.Token, balanceNode.Amount);
         }
 
-        // Step 2: Leave the capacity edges from the balance graph in place
+        stopWatch.Stop();
+        Console.WriteLine($"Added balance nodes in {stopWatch.ElapsedMilliseconds}ms");
+
+        stopWatch.Restart();
+
+        // Step 2: Copy capacity edges from the balance graph
         foreach (var capacityEdge in balanceGraph.Edges)
         {
-            capacityGraph.AddCapacityEdge(
+            capacityGraph = capacityGraph.AddCapacityEdge(
                 capacityEdge.From,
                 capacityEdge.To,
                 capacityEdge.Token,
@@ -50,34 +61,40 @@ public class GraphFactory
             );
         }
 
-        // Step 3: Create more capacity edges based on the trust graph
-        // Optimization: Precompute a trustee-to-trusters lookup dictionary
-        var trusteeToTrusters = new Dictionary<string, List<string>>();
+        stopWatch.Stop();
+        Console.WriteLine($"Added balance edges in {stopWatch.ElapsedMilliseconds}ms");
 
-        foreach (var edge in trustGraph.Edges)
-        {
-            if (!trusteeToTrusters.TryGetValue(edge.To, out var trusters))
-            {
-                trusters = new List<string>();
-                trusteeToTrusters[edge.To] = trusters;
-            }
+        stopWatch.Restart();
 
-            trusters.Add(edge.From);
-        }
+        // Step 3: Create additional capacity edges from the trust graph
+        // Precompute a tokenIssuer-to-acceptingNodes dictionary
+        var tokenTrustMap = trustGraph.Edges
+            .GroupBy(e => e.To)
+            .ToDictionary(
+                g => g.Key,
+                g => g.Select(e => e.From).ToHashSet()
+            );
 
+        stopWatch.Stop();
+        Console.WriteLine($"Precomputed token trust map in {stopWatch.ElapsedMilliseconds}ms");
+
+        stopWatch.Restart();
+
+        Console.WriteLine($"Looping through {balanceGraph.BalanceNodes.Count} balance nodes");
         foreach (var balanceNode in balanceGraph.BalanceNodes.Values)
         {
-            string tokenIssuer = balanceNode.Token;
-
-            if (trusteeToTrusters.TryGetValue(tokenIssuer, out var acceptingNodes))
+            if (!tokenTrustMap.TryGetValue(balanceNode.Token, out var acceptingNodes))
             {
-                foreach (var acceptingNode in acceptingNodes)
-                {
-                    // Avoid creating edges to self or invalid nodes
-                    if (acceptingNode == balanceNode.HolderAddress)
-                        continue;
+                continue;
+            }
 
-                    capacityGraph.AddCapacityEdge(
+            // Console.WriteLine($"{acceptingNodes.Count} accepting nodes for token {balanceNode.Token} balance of node {balanceNode.Address}");
+            foreach (var acceptingNode in acceptingNodes)
+            {
+                // Avoid self-loops
+                if (acceptingNode != balanceNode.HolderAddress)
+                {
+                    capacityGraph = capacityGraph.AddCapacityEdge(
                         balanceNode.Address,
                         acceptingNode,
                         balanceNode.Token,
@@ -87,14 +104,16 @@ public class GraphFactory
             }
         }
 
+        stopWatch.Stop();
+        Console.WriteLine($"Added trust edges in {stopWatch.ElapsedMilliseconds}ms");
+
         return capacityGraph;
     }
 
     public FlowGraph CreateFlowGraph(CapacityGraph capacityGraph)
     {
         var flowGraph = new FlowGraph();
-        flowGraph.AddCapacity(capacityGraph);
-
+        flowGraph = flowGraph.AddCapacity(capacityGraph);
         return flowGraph;
     }
 }

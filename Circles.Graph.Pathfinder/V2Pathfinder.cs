@@ -1,13 +1,15 @@
+using System.Diagnostics;
 using System.Numerics;
 using Circles.Graph.Graphs;
 using Circles.Graph.Pathfinder.DTOs;
 
 namespace Circles.Graph.Pathfinder;
 
-public class V2Pathfinder(TrustGraph trustGraph, BalanceGraph balanceGraph, GraphFactory graphFactory) : IPathfinder
+public class V2Pathfinder(TrustGraph trustGraph, CapacityGraph capacityGraph, GraphFactory graphFactory)
 {
     public async Task<MaxFlowResponse> ComputeMaxFlow(FlowRequest request)
     {
+        var stopWatch = new Stopwatch();
         if (string.IsNullOrEmpty(request.Source) || string.IsNullOrEmpty(request.Sink))
         {
             throw new ArgumentException("Source and Sink must be provided.");
@@ -17,12 +19,16 @@ public class V2Pathfinder(TrustGraph trustGraph, BalanceGraph balanceGraph, Grap
         {
             throw new ArgumentException("TargetFlow must be a valid integer.");
         }
-
-        // Create Capacity Graph
-        var capacityGraph = graphFactory.CreateCapacityGraph(balanceGraph, trustGraph);
+        
+        stopWatch.Restart();
 
         // Create Flow Graph
         var flowGraph = graphFactory.CreateFlowGraph(capacityGraph);
+        
+        stopWatch.Stop();
+        Console.WriteLine($"Created flow graph in {stopWatch.ElapsedMilliseconds}ms");
+        
+        stopWatch.Restart();
 
         // Validate Source and Sink
         if (!trustGraph.Nodes.ContainsKey(request.Source))
@@ -37,37 +43,55 @@ public class V2Pathfinder(TrustGraph trustGraph, BalanceGraph balanceGraph, Grap
 
         // Compute Max Flow
         var maxFlow = flowGraph.ComputeMaxFlowWithPaths(request.Source, request.Sink, targetFlow);
-
-        // Extract Paths with Flow
-        var pathsWithFlow =
-            flowGraph.ExtractPathsWithFlow(request.Source, request.Sink, BigInteger.Parse("0"));
-
-        // Collapse balance nodes to get a collapsed graph
-        var collapsedGraph = CollapseBalanceNodes(pathsWithFlow);
-
-        // Create transfer steps from the collapsed graph
-        var transferSteps = new List<TransferPathStep>();
-
-        foreach (var edge in collapsedGraph.Edges)
-        {
-            // For each edge, create a transfer step
-            if (edge.Flow == BigInteger.Zero)
-            {
-                // Filter reverse edges
-                continue;
-            }
-
-            transferSteps.Add(new TransferPathStep
-            {
-                From = edge.From,
-                To = edge.To,
-                TokenOwner = edge.Token,
-                Value = edge.Flow.ToString()
-            });
-        }
+        
+        stopWatch.Stop();
+        Console.WriteLine($"Computed max flow in {stopWatch.ElapsedMilliseconds}ms");
+        
+        // stopWatch.Restart();
+        //
+        // // Extract Paths with Flow
+        // var pathsWithFlow =
+        //     flowGraph.ExtractPathsWithFlow(request.Source, request.Sink, BigInteger.Parse("0"));
+        //
+        // stopWatch.Stop();
+        // Console.WriteLine($"Extracted paths with flow in {stopWatch.ElapsedMilliseconds}ms");
+        
+        // stopWatch.Restart();
+        //
+        // // Collapse balance nodes to get a collapsed graph
+        // var collapsedGraph = CollapseBalanceNodes(pathsWithFlow);
+        //
+        // stopWatch.Stop();
+        // Console.WriteLine($"Collapsed balance nodes in {stopWatch.ElapsedMilliseconds}ms");
+        //
+        // stopWatch.Restart();
+        //
+        // // Create transfer steps from the collapsed graph
+        // var transferSteps = new List<TransferPathStep>();
+        //
+        // foreach (var edge in collapsedGraph.Edges)
+        // {
+        //     // For each edge, create a transfer step
+        //     if (edge.Flow == BigInteger.Zero)
+        //     {
+        //         // Filter reverse edges
+        //         continue;
+        //     }
+        //
+        //     transferSteps.Add(new TransferPathStep
+        //     {
+        //         From = edge.From,
+        //         To = edge.To,
+        //         TokenOwner = edge.Token,
+        //         Value = edge.Flow.ToString()
+        //     });
+        // }
 
         // Prepare the response
-        var response = new MaxFlowResponse(maxFlow.ToString(), transferSteps);
+        var response = new MaxFlowResponse(maxFlow.ToString(), []);
+        
+        stopWatch.Stop();
+        Console.WriteLine($"Created transfer steps in {stopWatch.ElapsedMilliseconds}ms");
 
         return response;
     }

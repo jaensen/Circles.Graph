@@ -56,12 +56,34 @@ public class RandomScenario
             .Where(kvp => kvp.Value.Any(token => token.Value > 0))
             .ToList();
 
-        if (!sendersWithBalances.Any())
+        if (sendersWithBalances.Count == 0)
         {
             yield break; // No eligible senders
         }
+        
+        // Yield events for the initial balances (from 00000000-0000-0000-0000-000000000000 to all other addresses)
+        foreach (var kvp in _balances)
+        {
+            foreach (var token in kvp.Value)
+            {
+                if (token.Value > 0)
+                {
+                    yield return new TransferEvent(
+                        BlockNumber: _blockNumber++,
+                        Timestamp: Timestamp,
+                        TransactionIndex: 1, // Simplified for this scenario
+                        LogIndex: 1, // Simplified for this scenario
+                        BatchIndex: 0, // Simplified for this scenario
+                        From: "0x0000000000000000000000000000000000000000",
+                        To: kvp.Key,
+                        TokenAddress: token.Key,
+                        Value: token.Value);
+                }
+            }
+        }
 
-        for (int i = 0; i < count; i++)
+        int i = 0;
+        while (i < count)
         {
             // Randomly pick a sender with a balance
             var senderEntry = sendersWithBalances[Random.Shared.Next(0, sendersWithBalances.Count - 1)];
@@ -69,7 +91,6 @@ public class RandomScenario
 
             if (senderEntry.Value.Count == 0)
             {
-                i--; // Retry
                 continue; // No eligible tokens
             }
 
@@ -87,9 +108,14 @@ public class RandomScenario
             }
 
             // Generate a random transfer amount (up to the sender's balance)
-            var transferAmount = new BigInteger(Random.Shared.Next(1, (int)senderBalance + 1));
+            var transferAmount = new BigInteger(Random.Shared.Next(0, (int)senderBalance + 1));
 
             // Update balances
+            if (_balances[sender][tokenAddress] - transferAmount < 0)
+            {
+                continue; // Not enough balance
+            }
+            
             _balances[sender][tokenAddress] -= transferAmount;
             if (_balances[sender][tokenAddress] == 0)
             {
@@ -117,6 +143,8 @@ public class RandomScenario
                 To: receiver,
                 TokenAddress: tokenAddress,
                 Value: transferAmount);
+
+            i++;
         }
     }
 
@@ -186,9 +214,3 @@ public class RandomScenario
         }
     }
 }
-
-
-
-
-
-

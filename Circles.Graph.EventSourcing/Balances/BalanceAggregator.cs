@@ -57,7 +57,7 @@ public class BalanceGraphAggregator : IAggregator<IIndexEvent, BalanceGraph>
                     yield return new AddToBalance(
                         transfer.To,
                         transfer.TokenAddress,
-                        (BigInteger)transfer.Value,
+                        transfer.Value,
                         _currentTimestamp);
                 }
 
@@ -66,7 +66,7 @@ public class BalanceGraphAggregator : IAggregator<IIndexEvent, BalanceGraph>
                     yield return new SubtractFromBalance(
                         transfer.From,
                         transfer.TokenAddress,
-                        (BigInteger)transfer.Value,
+                        transfer.Value,
                         _currentTimestamp);
                 }
 

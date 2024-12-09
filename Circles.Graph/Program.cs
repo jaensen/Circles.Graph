@@ -1,12 +1,8 @@
 ﻿using System.Diagnostics;
-using Circles.Common;
-using Circles.Graph.Data;
-using Circles.Graph.Events;
 using Circles.Graph.EventSourcing.Balances;
 using Circles.Graph.EventSourcing.Trust;
 using Circles.Graph.Pathfinder;
 using Circles.Graph.Pathfinder.DTOs;
-using Circles.Graph.Rpc;
 
 namespace Circles.Graph;
 
@@ -19,52 +15,40 @@ public static class Program
     {
         CancellationTokenSource cts = new();
 
-        var eventSource = new EventSource(HttpRpcEndpoint, WsRpcEndpoint);
+        // var eventSource = new EventSource(HttpRpcEndpoint, WsRpcEndpoint);
 
         var trustGraphAggregator = new TrustGraphAggregator();
         var balanceGraphAggregator = new BalanceGraphAggregator();
 
-        var scenario = new RandomScenario(100_000);
+        Console.WriteLine("Initializing synthetic accounts...");
+        var scenario = new RandomScenario(10_000);
 
-        _ = Task.Run(async () =>
+        Console.WriteLine("Processing trust and balance events...");
+        var l = 0L;
+        // Initialize synthetic accounts
+        foreach (var evt in scenario.GetTrustEvents(50_000))
         {
-            // Initialize synthetic accounts
-            foreach (var evt in scenario.GetTrustEvents(1_000_000))
+            l++;
+            trustGraphAggregator.ProcessEvent(evt);
+            if (l % 100000 == 0)
             {
-                trustGraphAggregator.ProcessEvent(evt);
+                Console.WriteLine($"Processed {l} trust events");
             }
+        }
 
-            foreach (var evt in scenario.GetTransferEvents(1_000_000))
-            {
-                balanceGraphAggregator.ProcessEvent(evt);
-            }
-        }, cts.Token);
-
-        // Check if the edge counts are increasing. If not, break the loop.
-        var lastTrustEdgeCount = 0;
-        var lastBalanceEdgeCount = 0;
-
-        while (!cts.IsCancellationRequested)
+        l = 0;
+        foreach (var evt in scenario.GetTransferEvents(10_000))
         {
-            await Task.Delay(1000, cts.Token);
-
-            var trustEdgeCount = trustGraphAggregator.GetState().Edges.Count;
-            var trustNodeCount = trustGraphAggregator.GetState().Nodes.Count;
-            var balanceEdgeCount = balanceGraphAggregator.GetState().Edges.Count;
-            var balanceNodeCount = balanceGraphAggregator.GetState().Nodes.Count;
-            Console.WriteLine(
-                $"Trust Graph: {trustNodeCount} nodes, {trustEdgeCount} edges. Balance Graph: {balanceNodeCount} nodes, {balanceEdgeCount} edges.");
-
-            if (trustEdgeCount == lastTrustEdgeCount && balanceEdgeCount == lastBalanceEdgeCount)
+            l++;
+            balanceGraphAggregator.ProcessEvent(evt);
+            if (l % 100000 == 0)
             {
-                break;
+                Console.WriteLine($"Processed {l} balance events");
             }
-
-            lastTrustEdgeCount = trustEdgeCount;
-            lastBalanceEdgeCount = balanceEdgeCount;
         }
 
         // Sample 100 addresses from the trust graph
+        Console.WriteLine("Sampling 100 addresses...");
         var sampledAddresses = new List<string>();
         var trustGraph = trustGraphAggregator.GetState();
         var trustGraphNodes = trustGraph.Nodes.Values.ToArray();
@@ -78,10 +62,19 @@ public static class Program
 
         // Split the addresses into 2 groups. One is the sender and the other the recipient. 
         // Then go through the pairs and calculate the max flow between them.
-        var pathfinder = new V2Pathfinder(trustGraph, balanceGraphAggregator.GetState(), new GraphFactory());
-        var maxFlowResponses = new List<MaxFlowResponse>();
 
+        var balanceGraph = balanceGraphAggregator.GetState();
+        var graphFactory = new GraphFactory();
+
+        Console.WriteLine("Creating capacity graph...");
         Stopwatch stopwatch = new();
+        stopwatch.Restart();
+        var capacityGraph = graphFactory.CreateCapacityGraph(balanceGraph, trustGraph);
+        stopwatch.Stop();
+        Console.WriteLine($"Created capacity graph in {stopwatch.ElapsedMilliseconds}ms");
+
+        var pathfinder = new V2Pathfinder(trustGraph, capacityGraph, new GraphFactory());
+        var maxFlowResponses = new List<MaxFlowResponse>();
 
         for (int i = 0; i < sampledAddresses.Count; i++)
         {
@@ -93,19 +86,27 @@ public static class Program
                 }
 
                 Console.WriteLine($"Computing max flow between {sampledAddresses[i]} and {sampledAddresses[j]}");
-                stopwatch.Start();
+                stopwatch.Restart();
 
-                var response = pathfinder.ComputeMaxFlow(new FlowRequest
+                try
                 {
-                    Source = sampledAddresses[i],
-                    Sink = sampledAddresses[j],
-                    TargetFlow = "100000000000000000000"
-                }).Result;
+                    var response = pathfinder.ComputeMaxFlow(new FlowRequest
+                    {
+                        Source = sampledAddresses[i],
+                        Sink = sampledAddresses[j],
+                        TargetFlow = "100"
+                    }).Result;
+                    Console.WriteLine($"Max flow: {response.MaxFlow}, Time: {stopwatch.ElapsedMilliseconds}ms");
+
+                    maxFlowResponses.Add(response);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                    continue; 
+                }
 
                 stopwatch.Stop();
-                Console.WriteLine($"Max flow: {response.MaxFlow}, Time: {stopwatch.ElapsedMilliseconds}ms");
-
-                maxFlowResponses.Add(response);
             }
         }
     }

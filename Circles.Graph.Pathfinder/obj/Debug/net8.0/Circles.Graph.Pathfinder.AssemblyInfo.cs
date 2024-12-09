@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Circles.Graph.Pathfinder")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7696de736645b484565c31286990f0a4e148cd55")]
 [assembly: System.Reflection.AssemblyProductAttribute("Circles.Graph.Pathfinder")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Circles.Graph.Pathfinder")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

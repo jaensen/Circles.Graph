@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Circles.Common\Circles.Common.csproj" />
+      <ProjectReference Include="..\Circles.Graph.EventSourcing\Circles.Graph.EventSourcing.csproj" />
+      <ProjectReference Include="..\Circles.Graph.Pathfinder\Circles.Graph.Pathfinder.csproj" />
+    </ItemGroup>
+
+</Project>

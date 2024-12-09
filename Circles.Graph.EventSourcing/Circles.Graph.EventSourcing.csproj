@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Circles.Common\Circles.Common.csproj" />
+      <ProjectReference Include="..\Circles.Graph.Graphs\Circles.Graph.Graphs.csproj" />
+    </ItemGroup>
+
+</Project>

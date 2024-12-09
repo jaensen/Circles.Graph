@@ -1,0 +1,17 @@
+{
+  "version": 2,
+  "dgSpecHash": "sX7JPhJPNAI=",
+  "success": true,
+  "projectFilePath": "/home/daniel/src/aboutcircles/Circles.Graph/Circles.Graph.Pathfinder/Circles.Graph.Pathfinder.csproj",
+  "expectedPackageFiles": [
+    "/home/daniel/.nuget/packages/bigrational/1.0.0.7/bigrational.1.0.0.7.nupkg.sha512",
+    "/home/daniel/.nuget/packages/google.ortools/9.11.4210/google.ortools.9.11.4210.nupkg.sha512",
+    "/home/daniel/.nuget/packages/google.ortools.runtime.linux-arm64/9.11.4210/google.ortools.runtime.linux-arm64.9.11.4210.nupkg.sha512",
+    "/home/daniel/.nuget/packages/google.ortools.runtime.linux-x64/9.11.4210/google.ortools.runtime.linux-x64.9.11.4210.nupkg.sha512",
+    "/home/daniel/.nuget/packages/google.ortools.runtime.osx-arm64/9.11.4210/google.ortools.runtime.osx-arm64.9.11.4210.nupkg.sha512",
+    "/home/daniel/.nuget/packages/google.ortools.runtime.osx-x64/9.11.4210/google.ortools.runtime.osx-x64.9.11.4210.nupkg.sha512",
+    "/home/daniel/.nuget/packages/google.ortools.runtime.win-x64/9.11.4210/google.ortools.runtime.win-x64.9.11.4210.nupkg.sha512",
+    "/home/daniel/.nuget/packages/google.protobuf/3.26.1/google.protobuf.3.26.1.nupkg.sha512"
+  ],
+  "logs": []
+}

@@ -1,0 +1,17 @@
+/home/daniel/src/aboutcircles/Circles.Graph/Circles.Graph.Pathfinder/bin/Debug/net8.0/Circles.Graph.Pathfinder.deps.json
+/home/daniel/src/aboutcircles/Circles.Graph/Circles.Graph.Pathfinder/bin/Debug/net8.0/Circles.Graph.Pathfinder.dll
+/home/daniel/src/aboutcircles/Circles.Graph/Circles.Graph.Pathfinder/bin/Debug/net8.0/Circles.Graph.Pathfinder.pdb
+/home/daniel/src/aboutcircles/Circles.Graph/Circles.Graph.Pathfinder/bin/Debug/net8.0/Circles.Common.dll
+/home/daniel/src/aboutcircles/Circles.Graph/Circles.Graph.Pathfinder/bin/Debug/net8.0/Circles.Graph.Graphs.dll
+/home/daniel/src/aboutcircles/Circles.Graph/Circles.Graph.Pathfinder/bin/Debug/net8.0/Circles.Graph.Graphs.pdb
+/home/daniel/src/aboutcircles/Circles.Graph/Circles.Graph.Pathfinder/bin/Debug/net8.0/Circles.Common.pdb
+/home/daniel/src/aboutcircles/Circles.Graph/Circles.Graph.Pathfinder/obj/Debug/net8.0/Circles.Graph.Pathfinder.csproj.AssemblyReference.cache
+/home/daniel/src/aboutcircles/Circles.Graph/Circles.Graph.Pathfinder/obj/Debug/net8.0/Circles.Graph.Pathfinder.GeneratedMSBuildEditorConfig.editorconfig
+/home/daniel/src/aboutcircles/Circles.Graph/Circles.Graph.Pathfinder/obj/Debug/net8.0/Circles.Graph.Pathfinder.AssemblyInfoInputs.cache
+/home/daniel/src/aboutcircles/Circles.Graph/Circles.Graph.Pathfinder/obj/Debug/net8.0/Circles.Graph.Pathfinder.AssemblyInfo.cs
+/home/daniel/src/aboutcircles/Circles.Graph/Circles.Graph.Pathfinder/obj/Debug/net8.0/Circles.Graph.Pathfinder.csproj.CoreCompileInputs.cache
+/home/daniel/src/aboutcircles/Circles.Graph/Circles.Graph.Pathfinder/obj/Debug/net8.0/Circles..AE8921E0.Up2Date
+/home/daniel/src/aboutcircles/Circles.Graph/Circles.Graph.Pathfinder/obj/Debug/net8.0/Circles.Graph.Pathfinder.dll
+/home/daniel/src/aboutcircles/Circles.Graph/Circles.Graph.Pathfinder/obj/Debug/net8.0/refint/Circles.Graph.Pathfinder.dll
+/home/daniel/src/aboutcircles/Circles.Graph/Circles.Graph.Pathfinder/obj/Debug/net8.0/Circles.Graph.Pathfinder.pdb
+/home/daniel/src/aboutcircles/Circles.Graph/Circles.Graph.Pathfinder/obj/Debug/net8.0/ref/Circles.Graph.Pathfinder.dll

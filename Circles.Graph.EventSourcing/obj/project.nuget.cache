@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "QpTj4plnZNQ=",
+  "success": true,
+  "projectFilePath": "/home/daniel/src/aboutcircles/Circles.Graph/Circles.Graph.EventSourcing/Circles.Graph.EventSourcing.csproj",
+  "expectedPackageFiles": [
+    "/home/daniel/.nuget/packages/bigrational/1.0.0.7/bigrational.1.0.0.7.nupkg.sha512"
+  ],
+  "logs": []
+}

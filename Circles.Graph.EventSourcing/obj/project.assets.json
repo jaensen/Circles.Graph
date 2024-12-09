@@ -1,0 +1,148 @@
+{
+  "version": 3,
+  "targets": {
+    "net8.0": {
+      "BigRational/1.0.0.7": {
+        "type": "package",
+        "compile": {
+          "lib/net7.0/System.Numerics.Rational.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net7.0/System.Numerics.Rational.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "Circles.Common/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "BigRational": "1.0.0.7"
+        },
+        "compile": {
+          "bin/placeholder/Circles.Common.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Circles.Common.dll": {}
+        }
+      },
+      "Circles.Graph.Graphs/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "Circles.Common": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Circles.Graph.Graphs.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Circles.Graph.Graphs.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "BigRational/1.0.0.7": {
+      "sha512": "CM10SrdwFk1LQwo5BjLS4NkzTzaMM2fl9gndr92EdOj4dLrB771wG3OMJmiPCM2wtQ/+ByvBuZUe9loiTIq+Gw==",
+      "type": "package",
+      "path": "bigrational/1.0.0.7",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "bigrational.1.0.0.7.nupkg.sha512",
+        "bigrational.nuspec",
+        "lib/net6.0/System.Numerics.Rational.dll",
+        "lib/net6.0/System.Numerics.Rational.xml",
+        "lib/net7.0/System.Numerics.Rational.dll",
+        "lib/net7.0/System.Numerics.Rational.xml"
+      ]
+    },
+    "Circles.Common/1.0.0": {
+      "type": "project",
+      "path": "../Circles.Common/Circles.Common.csproj",
+      "msbuildProject": "../Circles.Common/Circles.Common.csproj"
+    },
+    "Circles.Graph.Graphs/1.0.0": {
+      "type": "project",
+      "path": "../Circles.Graph.Graphs/Circles.Graph.Graphs.csproj",
+      "msbuildProject": "../Circles.Graph.Graphs/Circles.Graph.Graphs.csproj"
+    }
+  },
+  "projectFileDependencyGroups": {
+    "net8.0": [
+      "Circles.Common >= 1.0.0",
+      "Circles.Graph.Graphs >= 1.0.0"
+    ]
+  },
+  "packageFolders": {
+    "/home/daniel/.nuget/packages/": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "/home/daniel/src/aboutcircles/Circles.Graph/Circles.Graph.EventSourcing/Circles.Graph.EventSourcing.csproj",
+      "projectName": "Circles.Graph.EventSourcing",
+      "projectPath": "/home/daniel/src/aboutcircles/Circles.Graph/Circles.Graph.EventSourcing/Circles.Graph.EventSourcing.csproj",
+      "packagesPath": "/home/daniel/.nuget/packages/",
+      "outputPath": "/home/daniel/src/aboutcircles/Circles.Graph/Circles.Graph.EventSourcing/obj/",
+      "projectStyle": "PackageReference",
+      "UsingMicrosoftNETSdk": false,
+      "configFilePaths": [
+        "/home/daniel/.nuget/NuGet/NuGet.Config"
+      ],
+      "originalTargetFrameworks": [
+        "net8.0"
+      ],
+      "sources": {
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "projectReferences": {
+            "/home/daniel/src/aboutcircles/Circles.Graph/Circles.Common/Circles.Common.csproj": {
+              "projectPath": "/home/daniel/src/aboutcircles/Circles.Graph/Circles.Common/Circles.Common.csproj"
+            },
+            "/home/daniel/src/aboutcircles/Circles.Graph/Circles.Graph.Graphs/Circles.Graph.Graphs.csproj": {
+              "projectPath": "/home/daniel/src/aboutcircles/Circles.Graph/Circles.Graph.Graphs/Circles.Graph.Graphs.csproj"
+            }
+          }
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
+      }
+    },
+    "frameworks": {
+      "net8.0": {
+        "targetAlias": "net8.0",
+        "imports": [
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48",
+          "net481"
+        ],
+        "assetTargetFallback": true,
+        "warn": true,
+        "frameworkReferences": {
+          "Microsoft.NETCore.App": {
+            "privateAssets": "all"
+          }
+        },
+        "runtimeIdentifierGraphPath": "/home/daniel/.dotnet/sdk/8.0.404/PortableRuntimeIdentifierGraph.json"
+      }
+    }
+  }
+}

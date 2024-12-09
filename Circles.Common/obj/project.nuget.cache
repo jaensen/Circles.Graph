@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "4RncvcRuVR8=",
+  "success": true,
+  "projectFilePath": "/home/daniel/src/aboutcircles/Circles.Graph/Circles.Common/Circles.Common.csproj",
+  "expectedPackageFiles": [
+    "/home/daniel/.nuget/packages/bigrational/1.0.0.7/bigrational.1.0.0.7.nupkg.sha512"
+  ],
+  "logs": []
+}

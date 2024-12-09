@@ -1,0 +1,340 @@
+{
+  "format": 1,
+  "restore": {
+    "/home/daniel/src/aboutcircles/Circles.Graph/Circles.Graph/Circles.Graph.csproj": {}
+  },
+  "projects": {
+    "/home/daniel/src/aboutcircles/Circles.Graph/Circles.Common/Circles.Common.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/daniel/src/aboutcircles/Circles.Graph/Circles.Common/Circles.Common.csproj",
+        "projectName": "Circles.Common",
+        "projectPath": "/home/daniel/src/aboutcircles/Circles.Graph/Circles.Common/Circles.Common.csproj",
+        "packagesPath": "/home/daniel/.nuget/packages/",
+        "outputPath": "/home/daniel/src/aboutcircles/Circles.Graph/Circles.Common/obj/",
+        "projectStyle": "PackageReference",
+        "UsingMicrosoftNETSdk": false,
+        "configFilePaths": [
+          "/home/daniel/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "BigRational": {
+              "target": "Package",
+              "version": "[1.0.0.7, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/home/daniel/.dotnet/sdk/8.0.404/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/home/daniel/src/aboutcircles/Circles.Graph/Circles.Graph.EventSourcing/Circles.Graph.EventSourcing.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/daniel/src/aboutcircles/Circles.Graph/Circles.Graph.EventSourcing/Circles.Graph.EventSourcing.csproj",
+        "projectName": "Circles.Graph.EventSourcing",
+        "projectPath": "/home/daniel/src/aboutcircles/Circles.Graph/Circles.Graph.EventSourcing/Circles.Graph.EventSourcing.csproj",
+        "packagesPath": "/home/daniel/.nuget/packages/",
+        "outputPath": "/home/daniel/src/aboutcircles/Circles.Graph/Circles.Graph.EventSourcing/obj/",
+        "projectStyle": "PackageReference",
+        "UsingMicrosoftNETSdk": false,
+        "configFilePaths": [
+          "/home/daniel/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "/home/daniel/src/aboutcircles/Circles.Graph/Circles.Common/Circles.Common.csproj": {
+                "projectPath": "/home/daniel/src/aboutcircles/Circles.Graph/Circles.Common/Circles.Common.csproj"
+              },
+              "/home/daniel/src/aboutcircles/Circles.Graph/Circles.Graph.Graphs/Circles.Graph.Graphs.csproj": {
+                "projectPath": "/home/daniel/src/aboutcircles/Circles.Graph/Circles.Graph.Graphs/Circles.Graph.Graphs.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/home/daniel/.dotnet/sdk/8.0.404/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/home/daniel/src/aboutcircles/Circles.Graph/Circles.Graph.Graphs/Circles.Graph.Graphs.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/daniel/src/aboutcircles/Circles.Graph/Circles.Graph.Graphs/Circles.Graph.Graphs.csproj",
+        "projectName": "Circles.Graph.Graphs",
+        "projectPath": "/home/daniel/src/aboutcircles/Circles.Graph/Circles.Graph.Graphs/Circles.Graph.Graphs.csproj",
+        "packagesPath": "/home/daniel/.nuget/packages/",
+        "outputPath": "/home/daniel/src/aboutcircles/Circles.Graph/Circles.Graph.Graphs/obj/",
+        "projectStyle": "PackageReference",
+        "UsingMicrosoftNETSdk": false,
+        "configFilePaths": [
+          "/home/daniel/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "/home/daniel/src/aboutcircles/Circles.Graph/Circles.Common/Circles.Common.csproj": {
+                "projectPath": "/home/daniel/src/aboutcircles/Circles.Graph/Circles.Common/Circles.Common.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/home/daniel/.dotnet/sdk/8.0.404/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/home/daniel/src/aboutcircles/Circles.Graph/Circles.Graph.Pathfinder/Circles.Graph.Pathfinder.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/daniel/src/aboutcircles/Circles.Graph/Circles.Graph.Pathfinder/Circles.Graph.Pathfinder.csproj",
+        "projectName": "Circles.Graph.Pathfinder",
+        "projectPath": "/home/daniel/src/aboutcircles/Circles.Graph/Circles.Graph.Pathfinder/Circles.Graph.Pathfinder.csproj",
+        "packagesPath": "/home/daniel/.nuget/packages/",
+        "outputPath": "/home/daniel/src/aboutcircles/Circles.Graph/Circles.Graph.Pathfinder/obj/",
+        "projectStyle": "PackageReference",
+        "UsingMicrosoftNETSdk": false,
+        "configFilePaths": [
+          "/home/daniel/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "/home/daniel/src/aboutcircles/Circles.Graph/Circles.Graph.Graphs/Circles.Graph.Graphs.csproj": {
+                "projectPath": "/home/daniel/src/aboutcircles/Circles.Graph/Circles.Graph.Graphs/Circles.Graph.Graphs.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "Google.OrTools": {
+              "target": "Package",
+              "version": "[9.11.4210, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/home/daniel/.dotnet/sdk/8.0.404/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/home/daniel/src/aboutcircles/Circles.Graph/Circles.Graph/Circles.Graph.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/daniel/src/aboutcircles/Circles.Graph/Circles.Graph/Circles.Graph.csproj",
+        "projectName": "Circles.Graph",
+        "projectPath": "/home/daniel/src/aboutcircles/Circles.Graph/Circles.Graph/Circles.Graph.csproj",
+        "packagesPath": "/home/daniel/.nuget/packages/",
+        "outputPath": "/home/daniel/src/aboutcircles/Circles.Graph/Circles.Graph/obj/",
+        "projectStyle": "PackageReference",
+        "UsingMicrosoftNETSdk": false,
+        "configFilePaths": [
+          "/home/daniel/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "/home/daniel/src/aboutcircles/Circles.Graph/Circles.Common/Circles.Common.csproj": {
+                "projectPath": "/home/daniel/src/aboutcircles/Circles.Graph/Circles.Common/Circles.Common.csproj"
+              },
+              "/home/daniel/src/aboutcircles/Circles.Graph/Circles.Graph.EventSourcing/Circles.Graph.EventSourcing.csproj": {
+                "projectPath": "/home/daniel/src/aboutcircles/Circles.Graph/Circles.Graph.EventSourcing/Circles.Graph.EventSourcing.csproj"
+              },
+              "/home/daniel/src/aboutcircles/Circles.Graph/Circles.Graph.Pathfinder/Circles.Graph.Pathfinder.csproj": {
+                "projectPath": "/home/daniel/src/aboutcircles/Circles.Graph/Circles.Graph.Pathfinder/Circles.Graph.Pathfinder.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/home/daniel/.dotnet/sdk/8.0.404/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
